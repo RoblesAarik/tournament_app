@@ -23,4 +23,36 @@ router.get("/", (req, res) => {
   });
 });
 
+// Seed route
+router.get("/seed", (req, res) => {
+  Tournament.create([
+    {
+      name: "LA Tournament",
+      description: "Tournament in Los Angeles",
+      numberOfTeams: 10,
+    },
+    {
+      name: "Jousting Tournament",
+      description: "Medevil Joust Tournament",
+      numberOfTeams: 8,
+    },
+    {
+      name: "Tournament of the Gods",
+      description: "Gods in war",
+      numberOfTeams: 100,
+    },
+  ]);
+  res.redirect("/tournaments");
+});
+
+// Show Route
+router.get("/:id", (req, res) => {
+  Tournament.findById(req.params.id, (err, tournaments) => {
+    if (err) {
+      console.log(err);
+    }
+    res.render("show.ejs", { tournaments: tournaments });
+  });
+});
+
 module.exports = router;
