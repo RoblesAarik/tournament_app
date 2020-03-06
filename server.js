@@ -34,6 +34,13 @@ app.use("/tournaments", tournamentController);
 app.get("/", (req, res) => {
   res.redirect("/tournaments");
 });
+
+const usersController = require("./controllers/users.js");
+app.use("/users", usersController);
+
+const sessionsController = require("./controllers/sessions.js");
+app.use("/sessions", sessionsController);
+
 // Port listener
 app.listen(3000, () => {
   console.log("listening");
