@@ -7,8 +7,12 @@ const mongoose = require("mongoose");
 
 const session = require("express-session");
 
+const methodOverride = require("method-override");
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
+
+app.use(methodOverride("_method"));
 
 app.use(
   session({
@@ -30,10 +34,6 @@ mongoose.connection.once("open", () => {
 const tournamentController = require("./controllers/tournament_controller.js");
 
 app.use("/tournaments", tournamentController);
-
-app.get("/", (req, res) => {
-  res.redirect("/tournaments");
-});
 
 const usersController = require("./controllers/users.js");
 app.use("/users", usersController);

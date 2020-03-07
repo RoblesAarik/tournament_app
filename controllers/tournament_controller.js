@@ -4,22 +4,33 @@ const router = express.Router();
 
 const Tournament = require("../models/tournments.js");
 
+const Team = require("../models/teams.js");
 //___________________
 //7 Restful Routes
 //___________________
-// Index  : GET    '/products'          1/7
-// Show   : GET    '/products/:id'      2/7
-// New    : GET    '/prodcuts/new'      3/7
-// Create : POST   '/products'          4/7
-// Edit   : GET    '/products/:id/edit' 5/7
-// Update : PUT    '/products/:id'      6/7
-// Delete : DELETE '/products/:id'      7/7
+// Index  : GET    '/products'          1/7 X
+// Show   : GET    '/products/:id'      2/7 X
+// New    : GET    '/prodcuts/new'      3/7 X
+// Create : POST   '/products'          4/7 X
+// Edit   : GET    '/products/:id/edit' 5/7 X
+// Update : PUT    '/products/:id'      6/7 X
+// Delete : DELETE '/products/:id'      7/7 X
 
 // Index Route
 
 router.get("/", (req, res) => {
   Tournament.find({}, (err, tournaments) => {
     res.render("index.ejs", { tournaments });
+  });
+});
+// New Route
+router.get("/new", (req, res) => {
+  res.render("new.ejs");
+});
+// Create route
+router.post("/", (req, res) => {
+  Tournament.create(req.body, (err, result) => {
+    res.redirect("/tournaments");
   });
 });
 
@@ -45,6 +56,27 @@ router.get("/seed", (req, res) => {
   res.redirect("/tournaments");
 });
 
+router.get("/seed2", (req, res) => {
+  Team.create(
+    {
+      name: "Loki",
+      img:
+        "https://i.pinimg.com/originals/b6/49/25/b64925fa5dca0ec2fd5602cc660ec78f.jpg",
+    },
+    {
+      name: "Avengers",
+      img:
+        "https://i.pinimg.com/236x/c8/aa/e7/c8aae7ccf04ffd6914be5653bcb28fea.jpg",
+    },
+    {
+      name: "Ninja Turtles",
+      img:
+        "https://i.pinimg.com/originals/14/74/18/147418be8fc80831e6bd2af3a6218451.jpg",
+    }
+  );
+  res.redirect("/");
+});
+
 // Show Route
 router.get("/:id", (req, res) => {
   Tournament.findById(req.params.id, (err, tournaments) => {
@@ -52,6 +84,34 @@ router.get("/:id", (req, res) => {
       console.log(err);
     }
     res.render("show.ejs", { tournaments: tournaments });
+  });
+});
+
+// Edit route
+router.get("/:id/edit", (req, res) => {
+  Tournament.findById(req.params.id, (err, found) => {
+    res.render("edit.ejs", {
+      tournaments: found,
+    });
+  });
+});
+
+// Put / Update route
+router.put("/:id", (req, res) => {
+  Tournament.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, update) => {
+      res.redirect("/tournaments");
+    }
+  );
+});
+
+// Delete Route
+router.delete("/:id", (req, res) => {
+  Tournament.findByIdAndDelete(req.params.id, (err, data) => {
+    res.redirect("/tournaments");
   });
 });
 

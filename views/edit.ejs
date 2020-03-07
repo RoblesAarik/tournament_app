@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <h1>Edit Fruit Page</h1>
+    <form action="/tournaments/<%=tournaments.id%>?_method=PUT" method="POST">
+      Name:
+      <input type="text" name="name" value="<%=tournaments.name%>" /><br />
+      Description:
+      <input
+        type="text"
+        name="description"
+        value="<%=tournaments.description%>"
+      /><br />
+      Number of Teams:
+      <input
+        type="text"
+        name="numberOfTeams"
+        value="<%=tournaments.numberOfTeams%>"
+      />
+      <br />
+      Winner:
+      <input type="text" name="winner" value="<%=tournaments.winner%>" />
+      <br />
+      <input type="submit" name="" value="Submit Changes" />
+    </form>
+  </body>
+</html>

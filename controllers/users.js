@@ -19,7 +19,7 @@ router.post("/", (req, res) => {
   );
   //   Creates new user in DB
   User.create(req.body, (err, createdUser) => {
-    res.redirect("/");
+    res.redirect("/tournaments");
   });
 });
 
