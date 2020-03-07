@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title></title>
-  </head>
+  <%- include('./partials/head.ejs') %>
 
   <body>
-    <h1>Create a Tournament</h1>
+    <%- include('./partials/nav.ejs') %>
+    <h1>Create an Event</h1>
     <form action="/tournaments" method="POST">
-      Name: <input type="text" name="name" /><br />
-      Description: <input type="text" name="description" /><br />
-      Number Of Teams: <input type="text" name="numberOfTeams" /><br />
+      <div class="form-group">
+        Name: <input type="text" name="name" /><br />
+      </div>
+      <div class="form-group">
+        Description: <input type="text" name="description" /><br />
+      </div>
+      <div class="form-group">
+        Number Of Teams: <input type="text" name="numberOfTeams" /><br />
+      </div>
       <input type="submit" name="" value="Create Tournament" />
     </form>
   </body>

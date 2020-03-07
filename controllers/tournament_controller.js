@@ -1,6 +1,7 @@
 // Setup
 const express = require("express");
 const router = express.Router();
+const session = require("express-session");
 
 const Tournament = require("../models/tournments.js");
 
@@ -23,6 +24,13 @@ router.get("/", (req, res) => {
     res.render("index.ejs", { tournaments });
   });
 });
+
+router.get("/", (req, res) => {
+  res.render("index.ejs", {
+    currentUser: req.session.currentUser,
+  });
+});
+
 // New Route
 router.get("/new", (req, res) => {
   res.render("new.ejs");

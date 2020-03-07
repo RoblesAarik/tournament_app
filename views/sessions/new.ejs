@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+  <%- include('../partials/head.ejs') %>
   <body>
+    <%- include('./partials/nav.ejs') %>
     <h1>Log In</h1>
     <form action="/sessions" method="POST">
-      Username: <input type="text" name="username" autofocus /> <br />
-      Password: <input type="text" name="password" /> <br />
-      <button type="submit">Log In</button>
+      <div class="form-group">
+        Username: <input type="text" name="username" autofocus /> <br />
+      </div>
+      <div class="form-group">
+        Password: <input type="text" name="password" /> <br />
+      </div>
+      <div class="form-group">
+        <button type="submit">Log In</button>
+      </div>
     </form>
   </body>
 </html>

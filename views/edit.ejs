@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title></title>
-  </head>
+  <%- include('./partials/head.ejs') %>
   <body>
-    <h1>Edit Fruit Page</h1>
+    <%- include('./partials/nav.ejs') %>
+    <h1>Edit Tournament</h1>
+    <div class="form-group">
     <form action="/tournaments/<%=tournaments.id%>?_method=PUT" method="POST">
       Name:
       <input type="text" name="name" value="<%=tournaments.name%>" /><br />
+    </div>
+    <div class="form-group">
       Description:
       <input
         type="text"
         name="description"
         value="<%=tournaments.description%>"
       /><br />
+    </div>
+      <div class="form-group">
       Number of Teams:
       <input
         type="text"
@@ -22,10 +25,14 @@
         value="<%=tournaments.numberOfTeams%>"
       />
       <br />
+    </div>
+      <div class="form-group">
       Winner:
       <input type="text" name="winner" value="<%=tournaments.winner%>" />
       <br />
+    </div>
       <input type="submit" name="" value="Submit Changes" />
     </form>
+
   </body>
 </html>

@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+  <%- include('./partials/head.ejs') %>
   <body>
+    <%- include('./partials/nav.ejs') %>
     <h1><%= tournaments.name %></h1>
+
+    <p><%= tournaments.description %></p>
+    <h3>Number of participants: <%= tournaments.numberOfTeams %></h3>
+    <h2>Teams in the tournament</h2>
+    <h4>League Standings</h4>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Team</th>
+          <th>Current Record</th>
+        </tr>
+      </thead>
+      <% for (let i = 0; i < tournaments.numberOfTeams; i ++) { %>
+      <tr>
+        <td>name</td>
+        <td>record</td>
+      </tr>
+      <% } %>
+    </table>
+
     <a href="/tournaments/<%= tournaments.id %>/Edit"><button>Edit</button></a>
 
     <form
@@ -15,22 +32,5 @@
     >
       <button type="submit">DELETE</button>
     </form>
-
-    <p><%= tournaments.description %></p>
-    <h3>Number of participants: <%= tournaments.numberOfTeams %></h3>
-    <h2>Teams in the tournament</h2>
-    <h4>League Standings</h4>
-    <table>
-      <tr>
-        <th>Team</th>
-        <th>Record</th>
-      </tr>
-      <% for (let i = 0; i < tournaments.numberOfTeams; i ++) { %>
-      <tr>
-        <td>name</td>
-        <td>record</td>
-      </tr>
-      <% } %>
-    </table>
   </body>
 </html>

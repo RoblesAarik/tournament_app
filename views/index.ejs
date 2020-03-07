@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+  <%- include('./partials/head.ejs') %>
   <body>
-    <nav>
-      <h1>
-        Welcome!
-      </h1>
-      <a href="/sessions/new"><button class="login">Log In</button></a>
-      <a href="/users/new"><button class="register">Sign Up</button></a>
-    </nav>
+    <%- include('./partials/nav.ejs') %>
+    <h1>Current Tournaments and Leagues</h1>
     <div class="container">
-      <ul>
+      <ul class="list-group">
         <% for(let i = 0; i < tournaments.length; i++) { %>
-        <li>
+        <li class="list-group-item">
           <a href="/tournaments/<%= tournaments[i].id%>"
             ><%= tournaments[i].name %></a
           >
@@ -24,5 +15,8 @@
         <% } %>
       </ul>
     </div>
+    <% if(currentUser) { %> Welcome to the
+    <a href="/">party</a>
+    <% } %>
   </body>
 </html>
