@@ -3,9 +3,8 @@ const express = require("express");
 const router = express.Router();
 const session = require("express-session");
 
-const Tournament = require("../models/tournments.js");
+const Tournament = require("../models/tournaments.js");
 
-const Team = require("../models/teams.js");
 //___________________
 //7 Restful Routes
 //___________________
@@ -21,19 +20,22 @@ const Team = require("../models/teams.js");
 
 router.get("/", (req, res) => {
   Tournament.find({}, (err, tournaments) => {
-    res.render("index.ejs", { tournaments });
+    res.render("index.ejs", {
+      tournaments,
+      currentUser: req.session.currentUser,
+    });
   });
 });
 
-router.get("/", (req, res) => {
-  res.render("index.ejs", {
-    currentUser: req.session.currentUser,
-  });
-});
+// router.get("/", (req, res) => {
+//   res.render("index.ejs", {
+//     currentUser: req.session.currentUser,
+//   });
+// });
 
 // New Route
 router.get("/new", (req, res) => {
-  res.render("new.ejs");
+  res.render("new.ejs", { currentUser: req.session.currentUser });
 });
 // Create route
 router.post("/", (req, res) => {
@@ -91,7 +93,10 @@ router.get("/:id", (req, res) => {
     if (err) {
       console.log(err);
     }
-    res.render("show.ejs", { tournaments: tournaments });
+    res.render("show.ejs", {
+      tournaments: tournaments,
+      currentUser: req.session.currentUser,
+    });
   });
 });
 
@@ -100,6 +105,7 @@ router.get("/:id/edit", (req, res) => {
   Tournament.findById(req.params.id, (err, found) => {
     res.render("edit.ejs", {
       tournaments: found,
+      currentUser: req.session.currentUser,
     });
   });
 });
