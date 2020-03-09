@@ -27,15 +27,19 @@ router.get("/", (req, res) => {
   });
 });
 
-// router.get("/", (req, res) => {
-//   res.render("index.ejs", {
-//     currentUser: req.session.currentUser,
-//   });
-// });
-
 // New Route
 router.get("/new", (req, res) => {
   res.render("new.ejs", { currentUser: req.session.currentUser });
+});
+
+// Add Teams route
+router.get("/:id/newteam", (req, res) => {
+  Tournament.findById(req.params.id, (err, tournaments) => {
+    res.render("teams.ejs", {
+      tournaments,
+      currentUser: req.session.currentUser,
+    });
+  });
 });
 // Create route
 router.post("/", (req, res) => {
@@ -50,16 +54,19 @@ router.get("/seed", (req, res) => {
     {
       name: "LA Tournament",
       description: "Tournament in Los Angeles",
+      location: "Memorial Coliseum",
       numberOfTeams: 10,
     },
     {
       name: "Jousting Tournament",
       description: "Medevil Joust Tournament",
+      location: "Roman Coliseum",
       numberOfTeams: 8,
     },
     {
       name: "Tournament of the Gods",
       description: "Gods in war",
+      location: "The Heavens",
       numberOfTeams: 100,
     },
   ]);
@@ -111,13 +118,36 @@ router.get("/:id/edit", (req, res) => {
 });
 
 // Put / Update route
-router.put("/:id", (req, res) => {
+router.put("/:id/", (req, res) => {
   Tournament.findByIdAndUpdate(
     req.params.id,
     req.body,
     { new: true },
     (err, update) => {
       res.redirect("/tournaments");
+    }
+  );
+});
+
+// Add new teams into the tournaments
+router.put("/:id/add", (req, res) => {
+  Tournament.findByIdAndUpdate(
+    req.params.id,
+    {
+      $push: {
+        teams: req.body,
+      },
+      $inc: { numberOfTeams: 1 },
+    },
+
+    { new: true },
+    (err, update) => {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        res.redirect("/tournaments");
+      }
     }
   );
 });

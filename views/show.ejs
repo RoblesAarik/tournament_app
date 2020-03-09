@@ -6,8 +6,8 @@
     <h1><%= tournaments.name %></h1>
 
     <p><%= tournaments.description %></p>
+    <p><%= tournaments.location %></p>
     <h3>Number of participants: <%= tournaments.numberOfTeams %></h3>
-    <h2>Teams in the tournament</h2>
     <h4>League Standings</h4>
     <table class="table table-striped">
       <thead class="thead-dark">
@@ -16,16 +16,20 @@
           <th>Current Record</th>
         </tr>
       </thead>
-      <% for (let i = 0; i < tournaments.numberOfTeams; i ++) { %>
+      <% for (let i = 0; i < tournaments.teams.length; i ++) { %>
       <tr>
-        <td>name</td>
-        <td>record</td>
+        <td><%= tournaments.teams[i].teamName %></td>
+        <td><%= tournaments.teams[i].record %></td>
       </tr>
       <% } %>
     </table>
 
     <% if(currentUser) { %>
     <a href="/tournaments/<%= tournaments.id %>/Edit"><button>Edit</button></a>
+
+    <a href="/tournaments/<%= tournaments.id%>/newteam"
+      ><button>Add a Team</button></a
+    >
 
     <form
       action="/tournaments/<%=tournaments.id%>?_method=DELETE"

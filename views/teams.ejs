@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+    <h1>Add Teams</h1>
+    <form
+      action="/tournaments/<%= tournaments.id %>/add?_method=PUT"
+      method="POST"
+    >
+      Team Name:
+      <input
+        type="text"
+        name="teamName"
+        value="<%= tournaments.teams.teamName %>"
+      />
+      <br />
+
+      Add Image File:<input
+        type="text"
+        name="img"
+        value="<%= tournaments.teams.img %>"
+      />
+      <br />
+
+      <button type="submit">Add Team</button>
+    </form>
+  </body>
+</html>
