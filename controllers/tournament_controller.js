@@ -117,6 +117,37 @@ router.get("/:id/edit", (req, res) => {
   });
 });
 
+// Edit Team info
+router.get("/teams/:id/:teamid", (req, res) => {
+  Tournament.findById(req.params.id, (err, found) => {
+    res.render("teamedit.ejs", {
+      tournaments: found,
+      teamid: found.teams[req.params.teamid],
+      currentUser: req.session.currentUser,
+    });
+  });
+});
+// Update teams
+router.put("/:id/:teamid", (req, res) => {
+  Tournament.update(
+    req.params.teamid,
+    teams,
+    {
+      $set: {
+        name: req.body.name,
+        img: req.body.img,
+        record: req.body.record,
+      },
+    },
+    { new: true },
+    (err, updateUser) => {
+      console.log(updateUser);
+      console.log(err);
+      res.redirect("/tournaments");
+    }
+  );
+});
+
 // Put / Update route
 router.put("/:id/", (req, res) => {
   Tournament.findByIdAndUpdate(

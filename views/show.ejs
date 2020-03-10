@@ -17,9 +17,24 @@
         </tr>
       </thead>
       <% for (let i = 0; i < tournaments.teams.length; i ++) { %>
+
       <tr>
-        <td><%= tournaments.teams[i].teamName %></td>
-        <td><%= tournaments.teams[i].record %></td>
+        <td>
+          <%= tournaments.teams[i].teamName %>
+          <img
+            class="teamimg"
+            src="<%= tournaments.teams[i].img %>"
+            alt="no pic"
+          />
+        </td>
+        <td>
+          <%= tournaments.teams[i].record %> <% if(currentUser) { %>
+          <a
+            href="/tournaments/teams/<%= tournaments.id %>/<%= tournaments.teams[i].id %>"
+            ><button>Edit Team</button></a
+          >
+          <% } %>
+        </td>
       </tr>
       <% } %>
     </table>
@@ -37,6 +52,6 @@
     >
       <button type="submit">DELETE</button>
     </form>
-    <% } %>
+    <% } %> <% console.log(tournaments) %>
   </body>
 </html>

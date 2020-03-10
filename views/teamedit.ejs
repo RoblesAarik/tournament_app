@@ -3,9 +3,9 @@
   <%- include('./partials/head.ejs') %>
   <body>
     <%- include('./partials/nav.ejs') %>
-    <h1>Add Teams</h1>
+    <h1>Edit Team Info</h1>
     <form
-      action="/tournaments/<%= tournaments.id %>/add?_method=PUT"
+      action="/tournaments/<%= tournaments.id%>/<%= tournaments.teams.id %>?_method=PUT"
       method="POST"
     >
       Team Name:
@@ -15,7 +15,6 @@
         value="<%= tournaments.teams.teamName %>"
       />
       <br />
-
       Add Image File:<input
         type="text"
         name="img"
@@ -23,7 +22,13 @@
       />
       <br />
 
-      <input type="submit" value="Edit" />
+      Record:
+      <input
+        type="text"
+        name="record"
+        value="<%= tournaments.teams.record %>"
+      />
+      <button type="submit">Edit Team</button>
     </form>
   </body>
 </html>

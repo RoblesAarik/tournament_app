@@ -5,3 +5,8 @@ body {
   background-repeat: no-repeat;
   background-size: 900px 400px;
 }
+
+.teamimg {
+  height: 50px;
+  width: 50px;
+}
