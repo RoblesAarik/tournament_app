@@ -127,38 +127,6 @@ router.get("/teams/:id/:teamid", (req, res) => {
     });
   });
 });
-// Update teams
-router.put("/:id/:teamid", (req, res) => {
-  Tournament.update(
-    req.params.teamid,
-    teams,
-    {
-      $set: {
-        name: req.body.name,
-        img: req.body.img,
-        record: req.body.record,
-      },
-    },
-    { new: true },
-    (err, updateUser) => {
-      console.log(updateUser);
-      console.log(err);
-      res.redirect("/tournaments");
-    }
-  );
-});
-
-// Put / Update route
-router.put("/:id/", (req, res) => {
-  Tournament.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true },
-    (err, update) => {
-      res.redirect("/tournaments");
-    }
-  );
-});
 
 // Add new teams into the tournaments
 router.put("/:id/add", (req, res) => {
@@ -179,6 +147,32 @@ router.put("/:id/add", (req, res) => {
       } else {
         res.redirect("/tournaments");
       }
+    }
+  );
+});
+
+// Update teams
+router.put("/:id/:teamid", (req, res) => {
+  Tournament.findByIdAndUpdate(
+    req.body.id,
+    { teams: req.params.teamid },
+    {
+      $set: {
+        "teams.$.teamName": req.body.teamName,
+        "teams.$.img": req.body.img,
+        "teams.$.record": req.body.record,
+      },
+    }
+  );
+});
+// Put / Update route
+router.put("/:id/", (req, res) => {
+  Tournament.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, update) => {
+      res.redirect(`/tournaments/${req.params.id}`);
     }
   );
 });
