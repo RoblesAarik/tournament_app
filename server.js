@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
 const methodOverride = require("method-override");
+const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
@@ -15,6 +16,14 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+app.use(function(req, res, next) {
+  if (!req.session) {
+    return next(new Error("Oh no")); //handle error
+  }
+  next(); //otherwise continue
+});
+
 mongoose.connect("mongodb://localhost:27017/sportsdb", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -34,6 +43,6 @@ const tournamentController = require("./controllers/tournament_controller.js");
 app.use("/tournaments", tournamentController);
 
 // Port listener
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("listening");
 });

@@ -55,43 +55,60 @@ router.get("/seed", (req, res) => {
       name: "LA Tournament",
       description: "Tournament in Los Angeles",
       location: "Memorial Coliseum",
-      numberOfTeams: 10,
+      teams: [
+        {
+          teamName: "Loki",
+          img:
+            "https://i.pinimg.com/originals/b6/49/25/b64925fa5dca0ec2fd5602cc660ec78f.jpg",
+        },
+        {
+          teamName: "Avengers",
+          img:
+            "https://i.pinimg.com/236x/c8/aa/e7/c8aae7ccf04ffd6914be5653bcb28fea.jpg",
+        },
+        {
+          teamName: "Ninja Turtles",
+          img:
+            "https://i.pinimg.com/originals/14/74/18/147418be8fc80831e6bd2af3a6218451.jpg",
+        },
+      ],
     },
     {
       name: "Jousting Tournament",
       description: "Medevil Joust Tournament",
       location: "Roman Coliseum",
-      numberOfTeams: 8,
+      teams: [
+        {
+          teamName: "Loki",
+          img:
+            "https://i.pinimg.com/originals/b6/49/25/b64925fa5dca0ec2fd5602cc660ec78f.jpg",
+        },
+        {
+          teamName: "Avengers",
+          img:
+            "https://i.pinimg.com/236x/c8/aa/e7/c8aae7ccf04ffd6914be5653bcb28fea.jpg",
+        },
+      ],
     },
     {
       name: "Tournament of the Gods",
       description: "Gods in war",
       location: "The Heavens",
-      numberOfTeams: 100,
+      teams: [
+        {
+          teamName: "Avengers",
+          img:
+            "https://i.pinimg.com/236x/c8/aa/e7/c8aae7ccf04ffd6914be5653bcb28fea.jpg",
+        },
+        {
+          teamName: "Ninja Turtles",
+          img:
+            "https://i.pinimg.com/originals/14/74/18/147418be8fc80831e6bd2af3a6218451.jpg",
+        },
+      ],
     },
   ]);
   res.redirect("/tournaments");
-});
-
-router.get("/seed2", (req, res) => {
-  Team.create(
-    {
-      name: "Loki",
-      img:
-        "https://i.pinimg.com/originals/b6/49/25/b64925fa5dca0ec2fd5602cc660ec78f.jpg",
-    },
-    {
-      name: "Avengers",
-      img:
-        "https://i.pinimg.com/236x/c8/aa/e7/c8aae7ccf04ffd6914be5653bcb28fea.jpg",
-    },
-    {
-      name: "Ninja Turtles",
-      img:
-        "https://i.pinimg.com/originals/14/74/18/147418be8fc80831e6bd2af3a6218451.jpg",
-    }
-  );
-  res.redirect("/");
 });
 
 // Show Route
@@ -152,19 +169,20 @@ router.put("/:id/add", (req, res) => {
 });
 
 // Update teams
-router.put("/:id/:teamid", (req, res) => {
-  Tournament.findByIdAndUpdate(
-    req.body.id,
-    { teams: req.params.teamid },
-    {
-      $set: {
-        "teams.$.teamName": req.body.teamName,
-        "teams.$.img": req.body.img,
-        "teams.$.record": req.body.record,
-      },
-    }
-  );
-});
+// router.put("/:id/:index/:teamid", (req, res) => {
+//   Tournament.findByIdAndUpdate(
+//     req.params.id,
+//     { teams[req.params.index].req.params.id: teams },
+//     {
+//       $set: {
+//         teamName: req.body.teamName,
+//         img: req.body.img,
+//         record: req.body.record,
+//       },
+//     }
+//   );
+// });
+
 // Put / Update route
 router.put("/:id/", (req, res) => {
   Tournament.findByIdAndUpdate(

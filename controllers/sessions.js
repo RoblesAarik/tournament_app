@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const session = require("express-session");
 
 const User = require("../models/users.js");
 
@@ -20,8 +21,12 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/", (req, res) => {
-  req.session.destroy(() => {
-    res.redirect("/tournaments");
+  req.session.destroy(err => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/sessions/new");
+    }
   });
 });
 
