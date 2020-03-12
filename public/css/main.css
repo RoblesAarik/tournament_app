@@ -3,7 +3,7 @@ body {
   background-color: rgb(92, 138, 174);
   background-image: url("https://i.pinimg.com/originals/bd/39/de/bd39de6566d7205cf27834aeb4abcd31.png");
   background-repeat: no-repeat;
-  background-size: 900px 400px;
+  background-size: auto;
 }
 
 .teamimg {
