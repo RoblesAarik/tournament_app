@@ -1,10 +1,10 @@
 // Server setup
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
 const methodOverride = require("method-override");
-const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
@@ -24,7 +24,7 @@ app.use(function(req, res, next) {
   next(); //otherwise continue
 });
 
-mongoose.connect("mongodb://localhost:27017/sportsdb", {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -43,6 +43,6 @@ const tournamentController = require("./controllers/tournament_controller.js");
 app.use("/tournaments", tournamentController);
 
 // Port listener
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log("listening");
 });
