@@ -29,23 +29,35 @@ router.get("/", (req, res) => {
 
 // New Route
 router.get("/new", (req, res) => {
-  res.render("new.ejs", { currentUser: req.session.currentUser });
+  if (req.session.currentUser) {
+    res.render("new.ejs", { currentUser: req.session.currentUser });
+  } else {
+    res.redirect("/sessions/new");
+  }
 });
 
 // Add Teams route
 router.get("/:id/newteam", (req, res) => {
   Tournament.findById(req.params.id, (err, tournaments) => {
-    res.render("teams.ejs", {
-      tournaments,
-      currentUser: req.session.currentUser,
-    });
+    if (req.session.currentUser) {
+      res.render("teams.ejs", {
+        tournaments,
+        currentUser: req.session.currentUser,
+      });
+    } else {
+      res.redirect("/sessions/new");
+    }
   });
 });
 // Create route
 router.post("/", (req, res) => {
-  Tournament.create(req.body, (err, result) => {
-    res.redirect("/tournaments");
-  });
+  if (req.session.currentUser) {
+    Tournament.create(req.body, (err, result) => {
+      res.redirect("/tournaments");
+    });
+  } else {
+    res.redirect("/sessions/new");
+  }
 });
 
 // Seed route
@@ -127,10 +139,14 @@ router.get("/:id", (req, res) => {
 // Edit route
 router.get("/:id/edit", (req, res) => {
   Tournament.findById(req.params.id, (err, found) => {
-    res.render("edit.ejs", {
-      tournaments: found,
-      currentUser: req.session.currentUser,
-    });
+    if (req.session.currentUser) {
+      res.render("edit.ejs", {
+        tournaments: found,
+        currentUser: req.session.currentUser,
+      });
+    } else {
+      res.redirect("/sessions/new");
+    }
   });
 });
 

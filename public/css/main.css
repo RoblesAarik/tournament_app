@@ -1,12 +1,27 @@
 body {
   text-align: center;
-  background-color: rgb(92, 138, 174);
-  background-image: url("https://i.pinimg.com/originals/bd/39/de/bd39de6566d7205cf27834aeb4abcd31.png");
+  color: whitesmoke;
+  background-image: url("/pictures/shooting-ball-2220403.jpg");
   background-repeat: no-repeat;
-  background-size: 900px 400px;
+  background-size: 750px 750px;
 }
 
 .teamimg {
   height: 50px;
   width: 50px;
+}
+
+.list-group {
+  width: 400px;
+  height: 400px;
+  padding-left: 50px;
+  opacity: 0.8;
+}
+
+tr {
+  color: whitesmoke;
+}
+
+input {
+  opacity: 0.8;
 }
