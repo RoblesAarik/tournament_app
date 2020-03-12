@@ -42,6 +42,11 @@ app.use("/sessions", sessionsController);
 const tournamentController = require("./controllers/tournament_controller.js");
 app.use("/tournaments", tournamentController);
 
+// wildcard route
+app.get("*", (req, res) => {
+  res.redirect("/tournaments");
+});
+
 // Port listener
 app.listen(process.env.PORT, () => {
   console.log("listening");
