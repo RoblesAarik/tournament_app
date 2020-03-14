@@ -151,15 +151,15 @@ router.get("/:id/edit", (req, res) => {
 });
 
 // Edit Team info
-router.get("/teams/:id/:teamid", (req, res) => {
-  Tournament.findById(req.params.id, (err, found) => {
-    res.render("teamedit.ejs", {
-      tournaments: found,
-      teamid: found.teams[req.params.teamid],
-      currentUser: req.session.currentUser,
-    });
-  });
-});
+// router.get("/teams/:id/:teamid", (req, res) => {
+//   Tournament.findById(req.params.id, (err, found) => {
+//     res.render("teamedit.ejs", {
+//       tournaments: found,
+//       teamid: found.teams[req.params.teamid],
+//       currentUser: req.session.currentUser,
+//     });
+//   });
+// });
 
 // Add new teams into the tournaments
 router.put("/:id/add", (req, res) => {
@@ -185,16 +185,22 @@ router.put("/:id/add", (req, res) => {
 });
 
 // Update teams
-// router.put("/:id/:index/:teamid", (req, res) => {
+// router.put("/:id/team/:teamid", (req, res) => {
+//   let mongoVar = "teams." + req.params.teamid;
+//   let mongoVarObject = {};
+//   mongoVarObject[mongoVar] = {
+//     teamName: req.body.teamName,
+//     img: req.body.img,
+//     record: req.body.record,
+//   };
+//   console.log(mongoVarObject);
+// locates study guide then locates
 //   Tournament.findByIdAndUpdate(
 //     req.params.id,
-//     { teams[req.params.index].req.params.id: teams },
-//     {
-//       $set: {
-//         teamName: req.body.teamName,
-//         img: req.body.img,
-//         record: req.body.record,
-//       },
+//     { $set: mongoVarObject },
+//     { new: true },
+//     (err, updateUser) => {
+//       res.redirect(`/tournaments/${req.params.id}`);
 //     }
 //   );
 // });

@@ -29,6 +29,10 @@
         </td>
         <td>
           <%= tournaments.teams[i].record %>
+          <a
+            href="/tournaments/teams/<%= tournaments.id%>/<%=tournaments.teams[i].id%>"
+            ><button>Edit Team</button></a
+          >
         </td>
       </tr>
       <% } %>
