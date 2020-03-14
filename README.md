@@ -7,10 +7,16 @@
 - HTML
 - CSS - Bootstrap
 - Express
+- Mongoose
+- JavaScript
 
 ## What this app solves
 
 A youth sports app that lets teams and leagues create, setup and check events.
+
+## Approach Taken
+
+I wanted create an app that allows people to create and hold event for youth sports. People that sign up are able to create events and edit their events by adding teams and changing tournament info.
 
 ## Who would use it
 
@@ -23,3 +29,4 @@ A youth sports app that lets teams and leagues create, setup and check events.
 - Edit teams
 - Create and post schedules
 - Delete specific teams
+- Add different sports thast can be filtered or searched
