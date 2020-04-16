@@ -12,16 +12,16 @@
 
 ## What this app solves
 
-A youth sports app that lets teams and leagues create, setup and check events.
+A sports app that lets teams and leagues create, setup and check events.
 
 ## Approach Taken
 
-I wanted create an app that allows people to create and hold event for youth sports. People that sign up are able to create events and edit their events by adding teams and changing tournament info.
+I wanted create an app that allows people to create and hold event for sports groups. People that sign up are able to create events and edit their events by adding teams and changing tournament info.
 
 ## Who would use it
 
 - Event creators
-- Youth sports coaches and players
+- Coaches and players
 - Parents
 
 ## Things to come back to
